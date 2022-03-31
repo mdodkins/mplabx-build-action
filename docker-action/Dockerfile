@@ -1,7 +1,10 @@
 FROM ubuntu:20.04
 
-ARG MPLABX_VERSION=5.45
-ARG XC8_VERSION=1.34
+ARG MPLABX_VERSION=6.00
+ARG COMPILER_NAME=xc8
+ARG COMPILER_VERSION=2.36
+ARG MPLABX_ARG="--8bitmcu 1 --16bitmcu 0 --32bitmcu 0 --othermcu 0"
+ARG INSTALL_IPE=0
 
 # Install the dependencies
 # See https://microchipdeveloper.com/install:mplabx-lin64
@@ -12,20 +15,20 @@ RUN dpkg --add-architecture i386 && \
   apt-get autoremove && \
   rm -rf /var/lib/apt/lists/*
 
-# Download and install XC8
-RUN wget -nv -O /tmp/xc8 "https://ww1.microchip.com/downloads/en/DeviceDoc/xc8-v${XC8_VERSION}-full-install-linux-installer.run" && \
-  chmod +x /tmp/xc8 && \
-  /tmp/xc8 --mode unattended --unattendedmodeui none --netservername localhost --LicenseType FreeMode --prefix "/opt/microchip/xc8/v${XC8_VERSION}" && \
-  rm /tmp/xc8
-
 # Download and install MPLAB X
 RUN wget -nv -O /tmp/mplabx "https://ww1.microchip.com/downloads/en/DeviceDoc/MPLABX-v${MPLABX_VERSION}-linux-installer.tar" &&\
   cd /tmp && \
   tar -xf mplabx && \
   rm mplabx && \
   mv "MPLABX-v${MPLABX_VERSION}-linux-installer.sh" mplabx && \
-  sudo ./mplabx --nox11 -- --unattendedmodeui none --mode unattended --ipe 0 --collectInfo 0 --installdir /opt/mplabx --16bitmcu 0 --32bitmcu 0 --othermcu 0 && \
+  sudo ./mplabx --nox11 -- --unattendedmodeui none --mode unattended --ipe ${INSTALL_IPE} --collectInfo 0 --installdir /opt/mplabx ${MPLABX_ARG} && \
   rm mplabx
+
+# Download and install Compiler
+RUN wget -nv -O /tmp/${COMPILER_NAME} "https://ww1.microchip.com/downloads/en/DeviceDoc/${COMPILER_NAME}-v${COMPILER_VERSION}-full-install-linux-x64-installer.run" && \
+  chmod +x /tmp/${COMPILER_NAME} && \
+  /tmp/${COMPILER_NAME} --mode unattended --unattendedmodeui none --netservername localhost --LicenseType FreeMode --prefix "/opt/microchip/${COMPILER_NAME}/v${COMPILER_VERSION}" && \
+  rm /tmp/${COMPILER_NAME}
 
 COPY build.sh /build.sh
 
