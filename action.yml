@@ -23,12 +23,21 @@ inputs:
     description: Version of the compiler to use
     required: true
     default: "1.34"
+  additional_packages:
+    description: Any additional packages needed to build the project
+    required: false
+  install_ipe:
+    description: Set to 1 if they IPE should be installed in the image
+    required:  false
+    default: "0"
 runs:
   using: docker
   image: Dockerfile
   args:
+    - ${{ inputs.project }}
+    - ${{ inputs.configuration }}
     - ${{ inputs.mplabx_version }}
     - ${{ inputs.complier_name }}
     - ${{ inputs.complier_version }}
-    - ${{ inputs.project }}
-    - ${{ inputs.configuration }}
+    - ${{ inputs.additional_packages }}
+    - ${{ inputs.install_ipe }}

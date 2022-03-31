@@ -1,10 +1,12 @@
 #!/bin/sh -l
 
-MPLABX_VERSION=$1
-COMPILER_NAME=$2
-COMPILER_VERSION=$3
-PROJECT=$4
-CONFIGURATION=$5
+PROJECT=$1
+CONFIGURATION=$2
+MPLABX_VERSION=$3
+COMPILER_NAME=$4
+COMPILER_VERSION=$5
+ADDITIONAL_PACKAGES=$6
+INSTALL_IPE=$7
 
 MPLABX_ARG="--8bitmcu "
 if [[ "$COMPILER_VERSION" == *"8"* ]]; then
@@ -40,6 +42,8 @@ docker build \
     --build-arg COMPILER_NAME="${COMPILER_NAME}" \
     --build-arg COMPILER_VERSION="${COMPILER_VERSION}" \
     --build-arg MPLABX_ARG="${MPLABX_ARG}" \
+    --build-arg ADDITIONAL_PACKAGES="${ADDITIONAL_PACKAGES}" \
+    --build-arg INSTALL_IPE="${INSTALL_IPE}" \
     . \
     && cd .. \
     && docker run -v "$(pwd):/github/workspace" --workdir /github/workspace docker-action "${PROJECT}" "${CONFIGURATION}"
