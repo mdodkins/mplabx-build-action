@@ -16,10 +16,10 @@ The configuration of the project to build. Defaults to `default`.
 
 The version of [MPLAB X](https://www.microchip.com/en-us/development-tools-tools-and-software/mplab-x-ide) to use. Defaults to `6.00`.
 
-### `complier_name`
+### `compiler_name`
 The name of the [Compiler](https://www.microchip.com/en-us/development-tools-tools-and-software/mplab-xc-compilers) to use. Defaults to `xc8` Valid options are `xc8`, `xc16`, and `xc32`
 
-### `complier_version`
+### `compiler_version`
 
 The version of the [Compiler](https://www.microchip.com/en-us/development-tools-tools-and-software/mplab-xc-compilers) to use. Defaults to `2.36`.
 
@@ -54,8 +54,8 @@ jobs:
           project: firmware.X
           configuration: default
           mplabx_version: "6.00"
-          complier_name: "xc8"
-          complier_version: "2.36"
+          compiler_name: "xc8"
+          compiler_version: "2.36"
 ```
 
 # Acknowledgements
