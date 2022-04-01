@@ -19,7 +19,7 @@ inputs:
     description: The name of the XC Complier to use
     required: true
     default: "xc8"
-  complier_version:
+  compiler_version:
     description: Version of the compiler to use
     required: true
     default: "1.34"
@@ -37,7 +37,7 @@ runs:
     - ${{ inputs.project }}
     - ${{ inputs.configuration }}
     - ${{ inputs.mplabx_version }}
-    - ${{ inputs.complier_name }}
-    - ${{ inputs.complier_version }}
+    - ${{ inputs.compiler_name }}
+    - ${{ inputs.compiler_version }}
     - ${{ inputs.additional_packages }}
     - ${{ inputs.install_ipe }}
