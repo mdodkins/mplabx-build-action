@@ -6,7 +6,7 @@ ARG ADDITIONAL_PACKAGES="python3"
 # See https://microchipdeveloper.com/install:mplabx-lin64
 RUN dpkg --add-architecture i386 && \
   apt-get update && \
-  apt-get install -y libc6:i386 libx11-6:i386 libxext6:i386 libstdc++6:i386 libexpat1:i386 wget sudo make ${ADDITIONAL_PACKAGES} && \
+  apt-get install -y libc6:i386 libx11-6:i386 libxext6:i386 libstdc++6:i386 libexpat1:i386 libusb-1.0-0 wget sudo make ${ADDITIONAL_PACKAGES} && \
   apt-get clean && \
   apt-get autoremove && \
   rm -rf /var/lib/apt/lists/*
