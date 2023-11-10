@@ -16,7 +16,7 @@ ARG MPLABX_ARG="--8bitmcu 1 --16bitmcu 0 --32bitmcu 0 --othermcu 0"
 ARG INSTALL_IPE=0
 
 # Download and install MPLAB X
-RUN wget -nv -O /tmp/mplabx "https://ww1.microchip.com/downloads/en/DeviceDoc/MPLABX-v${MPLABX_VERSION}-linux-installer.tar" &&\
+RUN wget -nv -O /tmp/mplabx "https://ww1.microchip.com/downloads/aemDocuments/documents/DEV/ProductDocuments/SoftwareTools/MPLABX-v${MPLABX_VERSION}-linux-installer.tar" &&\
   cd /tmp && \
   tar -xf mplabx && \
   rm mplabx && \
@@ -28,7 +28,7 @@ ARG COMPILER_NAME=xc8
 ARG COMPILER_VERSION=2.36
 
 # Download and install Compiler
-RUN wget -nv -O /tmp/${COMPILER_NAME} "https://ww1.microchip.com/downloads/en/DeviceDoc/${COMPILER_NAME}-v${COMPILER_VERSION}-full-install-linux-x64-installer.run" && \
+RUN wget -nv -O /tmp/${COMPILER_NAME} "https://ww1.microchip.com/downloads/aemDocuments/documents/DEV/ProductDocuments/SoftwareTools/${COMPILER_NAME}-v${COMPILER_VERSION}-full-install-linux-x64-installer.run" && \
   chmod +x /tmp/${COMPILER_NAME} && \
   /tmp/${COMPILER_NAME} --mode unattended --unattendedmodeui none --netservername localhost --LicenseType FreeMode --prefix "/opt/microchip/${COMPILER_NAME}/v${COMPILER_VERSION}" && \
   rm /tmp/${COMPILER_NAME}
