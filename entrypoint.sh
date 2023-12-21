@@ -46,4 +46,4 @@ docker build \
     --build-arg INSTALL_IPE="${INSTALL_IPE}" \
     . \
     && cd .. \
-    && docker run -v "$(pwd):/github/workspace" --workdir /github/workspace docker-action "${PROJECT}" "${CONFIGURATION}"
+    && docker run --add-host=host.docker.internal:host-gateway -v "$(pwd):/github/workspace" --workdir /github/workspace docker-action "${PROJECT}" "${CONFIGURATION}"
